@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function Messages({ messages }) {
+  console.log(messages.messages);
   const [stateMessages, setStateMessages] = useState([]);
 
   useEffect(() => {
@@ -8,9 +9,9 @@ function Messages({ messages }) {
   }, [messages]);
 
   return (
-    <div>
-      {stateMessages.map((message, index) => (
-        <div key={index} style={{ color: message.color }}>
+    <div className='Message-list'>
+      {stateMessages.map((message, id) => (
+        <div key={id} style={{ color: message.color }}>
           <strong>{message.user}: </strong>
           <span>{message.text}</span>
         </div>

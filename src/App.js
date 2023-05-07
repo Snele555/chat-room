@@ -26,7 +26,9 @@ function App() {
   const [text, setText] = useState('');
   const [user, setUser] = useState(randomName());
   const [color, setColor] = useState(randomColor());
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([
+    {Id: 1, text: "Pozdrav", user: "Marko Markić", color: "blue"}
+  ])
   
 
 
@@ -40,8 +42,9 @@ function App() {
 
   function onMessageSave() {
     const newMessage = { user, color, text };
+    console.log (newMessage);
     setMessages([...messages, newMessage]);
-    console.log (messages);
+ 
     setUser(randomName());
     setColor(randomColor());
     setText('');
@@ -49,7 +52,7 @@ function App() {
 
 
   return (
-    <main>
+    <main className='App'>
     <h1>Chat room </h1>
     <Messages messages={messages} />
     <Input
