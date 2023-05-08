@@ -5,7 +5,7 @@ console.log ("Input rendered")
     return (
         <div className = "Input">
             <form>
-            <input type= "text" placeholder="you wanted to say...." 
+            <input type= "text" placeholder="You wanted to say...." 
             value={message}
             onChange={onMessageChange}/>
 

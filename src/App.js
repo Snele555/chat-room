@@ -40,7 +40,8 @@ function App() {
     
   }
 
-  function onMessageSave() {
+  function onMessageSave(event) {
+    event.preventDefault()
     const newMessage = { user, color, text };
     console.log (newMessage);
     setMessages([...messages, newMessage]);
