@@ -53,3 +53,44 @@
     margin-left: 10px;
     display:flex
   }
+  .Messages-message {
+    display: flex;
+    margin-top: 10px;
+  }
+  
+  .Messages-message.activeUser {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+  
+  .Message-content {
+    display:flex;
+  }
+  
+  .activeUser>.Message-content {
+    align-items: flex-end;
+  }
+  
+  
+  .Message-content>.username {
+    display: block;
+    color: grey;
+    font-size: 14px;
+    padding-bottom: 4px;
+    background-color: blue;
+  }
+  
+  .Message-content>.text {
+    padding: 10px;
+    max-width: 400px;
+    margin: 0;
+    border-radius: 12px;
+    background-color: #7d8ccf;
+    color: rgb(125, 212, 160);
+    display: inline-block;
+  }
+  
+  .activeUser>.Message-content .text {
+    background-color: #6382f3;
+    color: #fff;
+  }
