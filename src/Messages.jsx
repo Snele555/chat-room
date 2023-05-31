@@ -1,11 +1,11 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
-function Messages({ messages, activeUser }) {
+function Messages({ message, activeUser }) {
 
 function displayMessage (message){
   const {user,text} = message;
-  const messageFromActiveUser = user.uuidv4 === activeUser.uuidv4
+  const messageFromActiveUser = user.id === activeUser.id;
   const className = messageFromActiveUser 
     ? "Messages-message activeUser"
     : "Messages-message";
@@ -27,7 +27,7 @@ function displayMessage (message){
 
   return (
     <div className='Message-list'>
-      {messages.map((message) => displayMessage(message)
+      {message && message.map((message) => displayMessage(message)
       )}
     </div>
   );

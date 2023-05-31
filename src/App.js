@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from './Input';
 import Messages from './Messages';
 import "./App.css"
@@ -15,7 +15,7 @@ function randomName() {
   const nickname = nicknames[Math.floor(Math.random() * nicknames.length)];
   const birthname = birthnames[Math.floor(Math.random() * birthnames.length)];
   return nickname + " " + birthname;
- 
+
 }
 
 function randomColor() {
@@ -29,10 +29,31 @@ function App() {
     username: randomName(),
     color: randomColor(),
   })
-  const [messages, setMessages] = useState([])
+  const [message, setMessages] = useState([])
   
+  const [drone, setDrone] = useState();
 
+  useEffect (() => {
+  const drone = new window.Scaledrone('JV9uhFd3abtFz6J6', {data: user,});
 
+  drone.on ("open", (error) => {
+    if (error) {
+      return console.error (error);
+    }
+    console.log ('Povezan na Sacledrone')
+    user.id = drone.clientId;
+    setUser(user);
+  });
+
+  const room = drone.subscribe("observable-MyApp");
+  room.on ("message", (message)=>{
+    setMessages ((prevState) => [...prevState, message]);
+  });
+
+  console.log ('usla u sobu');
+  setDrone(drone);
+
+}, [user]);
 
 
   function onMessageChange (event) {
@@ -45,17 +66,25 @@ function App() {
     event.preventDefault()
     const newMessage = { user, text };
     console.log (newMessage);
-    setMessages([...messages,{...newMessage}]);
+    setMessages([...message,{...newMessage}]);
+
+    if (drone) {
+      drone.publish({
+      room:"observable-MyApp",
+      message: newMessage,
+    });
+    console.log('korisnik je rekao' + message)
     //setUser(randomName());
     //setColor(randomColor());
     setText('');
   }
+}
 
   return (
     <main className='App'>
     <h1>Chat room </h1>
     <Messages 
-      messages={messages} 
+      message={message} 
       activeUser={user}
     />
     <Input
@@ -66,6 +95,6 @@ function App() {
   </main>
   
 );
-}
+};
 
 export default App;
