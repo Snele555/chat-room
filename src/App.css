@@ -58,7 +58,7 @@
     margin-top: 10px;
   }
   
-  .Messages-message.activeUser {
+  .Messages-message.activeMember {
     flex-direction: row-reverse;
     text-align: right;
   }
@@ -67,7 +67,7 @@
     display:flex;
   }
   
-  .activeUser>.Message-content {
+  .activeMember>.Message-content {
     align-items: flex-end;
   }
   
@@ -90,7 +90,7 @@
     display: inline-block;
   }
   
-  .activeUser>.Message-content .text {
+  .activeMember>.Message-content .text {
     background-color: #6382f3;
     color: #fff;
   }

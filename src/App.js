@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Input from './Input';
 import Messages from './Messages';
 import "./App.css"
-import Scaledrone from 'scaledrone-react-native';
+
 
 function randomName() {
   const nicknames = [
@@ -25,24 +25,26 @@ function randomColor() {
 
 function App() {
   const [text, setText] = useState('');
-  const [user, setUser] = useState({
+ const [message, setMessages] = useState([]);
+
+  const [member, setMembers] = useState({
     username: randomName(),
     color: randomColor(),
   })
-  const [message, setMessages] = useState([])
+ 
   
   const [drone, setDrone] = useState();
 
   useEffect (() => {
-  const drone = new window.Scaledrone('JV9uhFd3abtFz6J6', {data: user,});
+  const drone = new window.Scaledrone('JV9uhFd3abtFz6J6', {data: member,});
 
   drone.on ("open", (error) => {
     if (error) {
       return console.error (error);
     }
     console.log ('Povezan na Sacledrone')
-    user.id = drone.clientId;
-    setUser(user);
+    member.id = drone.clientId;
+    setMembers(member);
   });
 
   const room = drone.subscribe("observable-MyApp");
@@ -53,7 +55,7 @@ function App() {
   console.log ('usla u sobu');
   setDrone(drone);
 
-}, [user]);
+}, [member]);
 
 
   function onMessageChange (event) {
@@ -61,19 +63,20 @@ function App() {
     setText(event.target.value);
     
   }
+  
 
   function onMessageSave(event) {
     event.preventDefault()
-    const newMessage = { user, text };
-    console.log (newMessage);
+    const newMessage = {member,text};
+   // console.log (newMessage);
     setMessages([...message,{...newMessage}]);
 
-    if (drone) {
-      drone.publish({
-      room:"observable-MyApp",
-      message: newMessage,
-    });
-    console.log('korisnik je rekao' + message)
+   if (drone) {
+     drone.publish({
+    room:"observable-MyApp",
+     message: newMessage,
+  });
+    console.log('korisnik je rekao' + newMessage)
     //setUser(randomName());
     //setColor(randomColor());
     setText('');
@@ -85,7 +88,7 @@ function App() {
     <h1>Chat room </h1>
     <Messages 
       message={message} 
-      activeUser={user}
+      activeMember={member}
     />
     <Input
       message={text}
