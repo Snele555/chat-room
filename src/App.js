@@ -25,7 +25,7 @@ function randomColor() {
 
 function App() {
   const [text, setText] = useState('');
- const [message, setMessages] = useState([]);
+  const [message, setMessages] = useState([]);
 
   const [member, setMembers] = useState({
     username: randomName(),
