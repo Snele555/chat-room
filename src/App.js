@@ -78,10 +78,11 @@ function App() {
     room:"observable-MyApp",
      message: newMessage.data,
   });
-    console.log("korisnik je rekao" + ":" + newMessage.data)
+    console.log("korisnik je rekao: " + newMessage.data)
     //setUser(randomName());
     //setColor(randomColor());
     setText('');
+
   }
 }
 
