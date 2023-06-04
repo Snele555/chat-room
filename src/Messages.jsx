@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 function Messages({ message, activeMember }) {
 
 function displayMessage (message){
-  const {member,text} = message;
+  const {member,data} = message;
 
-  if (!member) {
+  if (!member || !member.id) {
     console.error("Invalid message object:", message);
     return null;
   }
@@ -19,11 +19,11 @@ function displayMessage (message){
     return (
       <li className={className} key={uuidv4()}>
       <div className='Message-content'>
-        <div className='username'>
-          {member.username}:
+        <div className='Username'style={{color: member.clientData.color}}>
+          {member.clientData.username}
         </div>
           <div className='text'>
-            {text}
+            {data}
           </div>
           
         </div>
@@ -34,9 +34,12 @@ console.log("Messages:", message);
 console.log("Active Member:", activeMember);
 
   return (
-    <div className='Message-list'>
-      {message && message.map((message) => displayMessage(message)
+    <div>
+      <ul className='Message-list'>
+        {message.map((message) => displayMessage(message)
       )}
+      </ul>
+      
     </div>
   );
 }

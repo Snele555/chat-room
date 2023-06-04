@@ -26,6 +26,48 @@
     
 
 
+  
+  .Messages-message {
+    display: flex;
+    margin-top: 10px;
+  }
+  
+  .Messages-message.activeMember {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+  
+  .Message-content {
+    display:flex;
+  }
+  
+  .activeMember>.Message-content {
+    align-items: flex-end;
+  }
+  
+  
+  .Message-content>.username {
+    display: flexbox;
+    font-size: 18px;
+    padding-bottom: 4px;
+    border: #f36363;
+  }
+  
+  .Message-content>.text {
+    padding: 10px;
+    max-width: 400px;
+    margin: 0;
+    border-radius: 12px;
+    background-color: #7dcf8c;
+    color: rgb(12, 14, 12);
+    display: inline-block;
+  }
+  
+  .activeMember>.Message-content .text {
+    background-color: #f36363;
+    color: #fff;
+  }
+  
   form {
     display: flex;
     width: 100%;
@@ -52,45 +94,4 @@
     border-radius: 8px;
     margin-left: 10px;
     display:flex
-  }
-  .Messages-message {
-    display: flex;
-    margin-top: 10px;
-  }
-  
-  .Messages-message.activeMember {
-    flex-direction: row-reverse;
-    text-align: right;
-  }
-  
-  .Message-content {
-    display:flex;
-  }
-  
-  .activeMember>.Message-content {
-    align-items: flex-end;
-  }
-  
-  
-  .Message-content>.username {
-    display: block;
-    color: grey;
-    font-size: 14px;
-    padding-bottom: 4px;
-    background-color: blue;
-  }
-  
-  .Message-content>.text {
-    padding: 10px;
-    max-width: 400px;
-    margin: 0;
-    border-radius: 12px;
-    background-color: #7d8ccf;
-    color: rgb(125, 212, 160);
-    display: inline-block;
-  }
-  
-  .activeMember>.Message-content .text {
-    background-color: #6382f3;
-    color: #fff;
   }

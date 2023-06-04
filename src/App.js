@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Input from './Input';
 import Messages from './Messages';
 import "./App.css"
-
+import { v4 as uuidv4 } from 'uuid';
 
 function randomName() {
   const nicknames = [
@@ -30,10 +30,13 @@ function App() {
   const [member, setMembers] = useState({
     username: randomName(),
     color: randomColor(),
+    id: uuidv4(),
   })
  
   
   const [drone, setDrone] = useState();
+
+
 
   useEffect (() => {
   const drone = new window.Scaledrone('JV9uhFd3abtFz6J6', {data: member,});
@@ -42,7 +45,7 @@ function App() {
     if (error) {
       return console.error (error);
     }
-    console.log ('Povezan na Sacledrone')
+    console.log ('Povezan na Sacledrone');
     member.id = drone.clientId;
     setMembers(member);
   });
@@ -67,16 +70,15 @@ function App() {
 
   function onMessageSave(event) {
     event.preventDefault()
-    const newMessage = {member,text};
-   // console.log (newMessage);
-    setMessages([...message,{...newMessage}]);
+    const newMessage = { data: text, id: uuidv4(),};
+    //setMessages((prevMessages)=> [...prevMessages,newMessage]);
 
    if (drone) {
      drone.publish({
     room:"observable-MyApp",
-     message: newMessage,
+     message: newMessage.data,
   });
-    console.log('korisnik je rekao' + newMessage)
+    console.log("korisnik je rekao" + ":" + newMessage.data)
     //setUser(randomName());
     //setColor(randomColor());
     setText('');
@@ -91,7 +93,7 @@ function App() {
       activeMember={member}
     />
     <Input
-      message={text}
+      text={text}
       onMessageChange={onMessageChange}
       onMessageSave={onMessageSave}
     />
