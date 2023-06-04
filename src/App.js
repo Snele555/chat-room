@@ -45,7 +45,7 @@ function App() {
     if (error) {
       return console.error (error);
     }
-    console.log ('Povezan na Sacledrone');
+    console.log ('Connected to Scaledrone');
     member.id = drone.clientId;
     setMembers(member);
   });
@@ -55,7 +55,7 @@ function App() {
     setMessages ((prevState) => [...prevState, message]);
   });
 
-  console.log ('usla u sobu');
+  console.log ('Subscribe to room');
   setDrone(drone);
 
 }, [member]);
@@ -71,7 +71,6 @@ function App() {
   function onMessageSave(event) {
     event.preventDefault()
     const newMessage = { data: text, id: uuidv4(),};
-    //setMessages((prevMessages)=> [...prevMessages,newMessage]);
 
    if (drone) {
      drone.publish({
@@ -79,8 +78,6 @@ function App() {
      message: newMessage.data,
   });
     console.log("korisnik je rekao: " + newMessage.data)
-    //setUser(randomName());
-    //setColor(randomColor());
     setText('');
 
   }
