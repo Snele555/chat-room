@@ -30,8 +30,8 @@ function displayMessage (message){
         </li>
     )
 }
-console.log("Messages:", message);
-console.log("Active Member:", activeMember);
+//console.log("Messages:", message);
+//console.log("Active Member:", activeMember);
 
   return (
     <div>
