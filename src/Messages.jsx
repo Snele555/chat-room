@@ -1,5 +1,6 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import { useEffect, useRef } from 'react';
 
 function Messages({ message, activeMember }) {
 
@@ -33,8 +34,17 @@ function displayMessage (message){
 //console.log("Messages:", message);
 //console.log("Active Member:", activeMember);
 
+const messageContainerRef = useRef(null);
+
+useEffect(() => {
+  // Scroll to the bottom of the message container when new messages arrive
+  if (messageContainerRef.current) {
+    messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+  }
+}, [message]);
+
   return (
-    <div>
+    <div ref={messageContainerRef} className='message-container'>
       <ul className='Message-list'>
         {message.map((message) => displayMessage(message)
       )}

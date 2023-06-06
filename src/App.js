@@ -69,7 +69,12 @@ function App() {
   
 
   function onMessageSave(event) {
-    event.preventDefault()
+    event.preventDefault();
+    if (text.trim() === '') {
+    alert ("Please enter a message");
+    return;
+    }
+
     const newMessage = { data: text, id: uuidv4(),};
 
    if (drone) {
